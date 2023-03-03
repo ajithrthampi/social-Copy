@@ -6,6 +6,7 @@ const userRouter = require('./routes/user')
 const adminRoute = require('./routes/admin')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
+const path = require('path');
 
 
 app.use(express.json())
@@ -15,11 +16,11 @@ dotenv.config()
 
 mongoose.connect(process.env.DATABASE_ACCESS,()=>console.log('Database is connected'))
 
-app.use(express.static(path.join(_dirname, "./my-app/build"))); 
+app.use(express.static(path.join(__dirname, "./my-app/build"))); 
 
-app.get("*", (req,res) => {
-    res.sendFile(path.join(_dirname, "./my-app/build/index.html"))
-})
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "./my-app/build/index.html"))
+// })
 app.use('/',userRouter)
 app.use('/admin',adminRoute)
 
