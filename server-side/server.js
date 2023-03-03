@@ -15,6 +15,11 @@ dotenv.config()
 
 mongoose.connect(process.env.DATABASE_ACCESS,()=>console.log('Database is connected'))
 
+app.use(express.static(path.join(_dirname, "./my-app/build"))); 
+
+app.get("*", (req,res) => {
+    res.sendFile(path.join(_dirname, "./my-app/build/index.html"))
+})
 app.use('/',userRouter)
 app.use('/admin',adminRoute)
 
